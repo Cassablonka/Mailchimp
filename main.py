@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 from mailchimp3 import MailChimp
-import os
 
 app = Flask(__name__)
 
@@ -11,8 +10,8 @@ def hello():
         email = request.form['email']
         marks_10 = request.form['10th']
         marks_12 = request.form['12th']
-        client = MailChimp(os.environ.get('API_KEY'), '{}-{}'.format('Cassa2006', 'us5'))
-        if client.lists.members.create(os.environ.get('LIST_ID'), {'email_address': email, 'status': 'subscribed', 'merge_fields': {'FNAME': name, '10TH': marks_10, '12TH': marks_12,}}):
+        client = MailChimp('87c1c11c32ac8f96255a07744dafe4a0-us5', '{}-{}'.format('Cassa2006', 'us5'))
+        if client.lists.members.create('84e91fce79', {'email_address': email, 'status': 'subscribed', 'merge_fields': {'FNAME': name, '10TH': marks_10, '12TH': marks_12,}}):
             return render_template('success.html')
     return render_template('index.html')
 
