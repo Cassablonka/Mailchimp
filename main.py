@@ -13,6 +13,8 @@ def hello():
         client = MailChimp(os.environ.get('API_KEY'), '{}-{}'.format('Cassa2006', 'us5'))
         if client.lists.members.create(os.environ.get('LIST_ID'), {'email_address': email, 'status': 'subscribed', 'merge_fields': {'FNAME': name, '10TH': marks_10, '12TH': marks_12,}}):
             return render_template('success.html')
+        else:
+            return render_template('failed.html')
     return render_template('index.html')
 
 
